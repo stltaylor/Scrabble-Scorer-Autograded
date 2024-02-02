@@ -60,17 +60,10 @@ let scrabbleScorer = function(word) {
 }
 
 
-
-function initialPrompt() {
-   console.log("Let's play some scrabble!\n");
-   let answer = input.question('Enter a word to score: ')
-   console.log(simpleScorer(answer));
-};
-
 let simpleScore = {
    scorerFunction: simpleScorer,
    description: 'Each letter is worth 1 point.',
-   name: 'Simple Score: '
+   name: 'Simple Score:'
 }
 
 let vowelBonusScore = {
@@ -82,7 +75,7 @@ let vowelBonusScore = {
 let scrabbleScore = {
    scorerFunction: scrabbleScorer,
    description: 'Traditional scoring system',
-   name: 'Scrabble: '
+   name: 'Scrabble:     '
 }
 
 const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
@@ -144,6 +137,12 @@ function runProgram() {
    scorerPrompt();
    
 }
+
+function initialPrompt() {
+   console.log("Let's play some scrabble!\n");
+   let answer = input.question('Enter a word to score: ')
+   console.log(simpleScorer(answer));
+};
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
