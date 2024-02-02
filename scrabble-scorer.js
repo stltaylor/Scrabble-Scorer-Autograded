@@ -64,15 +64,13 @@ let scrabbleScorer = function(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!\n");
    let answer = input.question('Enter a word to score: ')
-    console.log(simpleScorer(answer));
+   console.log(simpleScorer(answer));
 };
 
 let simpleScore = {
    scorerFunction: simpleScorer,
    description: 'Each letter is worth 1 point.',
    name: 'Simple Score: '
-   
-    
 }
 
 let vowelBonusScore = {
@@ -85,13 +83,12 @@ let scrabbleScore = {
    scorerFunction: scrabbleScorer,
    description: 'Traditional scoring system',
    name: 'Scrabble: '
-   
 }
 
 const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
 
 function letterCheck(letter) {
-   return (letter >= 'a' && letter <= 'z' || letter >= 'A' && letter <= 'Z')
+   return (letter >= 'a' && letter <= 'z' || letter >= 'A' && letter <= 'Z' || letter == ' ')
 }
 
 function validWord(word) {
@@ -126,6 +123,7 @@ function scorerPrompt() {
       }
    }
 }
+
 function transform(pointStructure) {
     let newNew = {};
     for (const pointValue in pointStructure) {
@@ -139,6 +137,8 @@ function transform(pointStructure) {
 };
 
 let newPointStructure = transform(oldPointStructure);
+
+newPointStructure[' '] = 0;
 
 function runProgram() {
    scorerPrompt();
