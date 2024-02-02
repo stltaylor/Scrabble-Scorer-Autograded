@@ -90,22 +90,42 @@ let scrabbleScore = {
 
 const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
 
+function letterCheck(letter) {
+   return (letter >= 'a' && letter <= 'z' || letter >= 'A' && letter <= 'Z')
+}
+
+function validWord(word) {
+   for (let i = 0; i < word.length; i ++) {
+      if (!letterCheck(word[i])) {
+         return false;
+      }
+   }
+   return true;
+}
+
+
 function scorerPrompt() {
    let word = ''
 
    console.log("Let's play some scrabble!\n");
 
    word = input.question('Enter a word to score: ')
-      while (true) {
-         scoringOption = input.question(`Which scoring algorithm would you like to use?\n\n0 - ${scoringAlgorithms[0].name} ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}${scoringAlgorithms[2].description}\nEnter 0, 1, or 2: `)
-         if (scoringOption == 1 || scoringOption == 2 || scoringOption == 0) {
-            console.log(`Score for '${word}': ` + scoringAlgorithms[scoringOption].scorerFunction(word));
-            break;
-         } else { 
-            console.log('Invalid input. Please select a valid option')
-         }
+   while (!validWord(word)) {
+      console.log('Invalid input. Please enter a word containing only letters');
+      word = input.question('Enter a word to score: ');
+   }
+   scoringOption = input.question(`Which scoring algorithm would you like to use?\n\n0 - ${scoringAlgorithms[0].name} ${scoringAlgorithms[0].description}\n1 - ${scoringAlgorithms[1].name}${scoringAlgorithms[1].description}\n2 - ${scoringAlgorithms[2].name}${scoringAlgorithms[2].description}\nEnter 0, 1, or 2: `)
+   while (true) {
+      
+      if (scoringOption == 1 || scoringOption == 2 || scoringOption == 0) {
+         console.log(`Score for '${word}': ` + scoringAlgorithms[scoringOption].scorerFunction(word));
+         break;
+      } else { 
+         scoringOption = input.question('Invalid input. Please select from the available options: ')
+
       }
    }
+}
 function transform(pointStructure) {
     let newNew = {};
     for (const pointValue in pointStructure) {
